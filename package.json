@@ -1,0 +1,10 @@
+{
+    "name": "qtum-benchmark",
+    "version": "1.0.0",
+    "description": "Qtum benchmark test",
+    "dependencies": {
+        "qtumjs": "^1.9.1",
+        "readline-sync": "^1.4.9",
+        "sleep": "^5.2.3"
+    }
+}
