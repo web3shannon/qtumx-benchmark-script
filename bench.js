@@ -125,15 +125,13 @@ async function send(rpc, num, gas, addrList) {
         // send txs
         let callList = []
         for (let i = 0; i != rawTransactionList.length; i++) {
-            callList.push(rpc.rawCall('sendrawtransaction', [rawTransactionList[i]]))
+            callList.push(rpc.rawCall('sendrawtransaction', [rawTransactionList[i], false, false]))  // use a modified sendrawtransaction API
 
-            if (callList.length == 4) {  // threads of rpc
+            if (callList.length == 50) {  // threads of rpc
                 await Promise.all(callList)
                 callList = []
             }
         }
-
-        
 
         await waitMempool(rpc)
     }
@@ -155,4 +153,4 @@ async function run(url, num, splitNum, gas) {
     await send(rpc, num, gas, addrList)
 }
 
-run('http://test:test@127.0.0.1:12581', 1024, 2, 0.1).then()
+run('http://test:test@127.0.0.1:12581', 8096, 2, 0.1).then()
