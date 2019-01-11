@@ -7,10 +7,11 @@ async function run(url, num) {
     const rpc = new QtumRPC(url)
     let blockhash = await rpc.rawCall('getbestblockhash')
 
+    console.log('# block_height\tblock_time\tblock_hash\tblock_miner\tblock_tx_count')
     for (let i = 0; i != num; i++) {
         blockData = await rpc.rawCall('getblock', [blockhash])
 
-        console.log(blockData.height, blockData.time, blockhash, blockData.tx.length)
+        console.log(`${blockData.height}\t${blockData.time}\t${blockhash}\t${blockData.miner}\t${blockData.tx.length}`)
         blockhash = blockData.previousblockhash
     }
 }
